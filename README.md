@@ -2,5 +2,5 @@
 
 Membres du groupe :
 - Julien Le Née
-- Jean-Batiste Barthre
+- Jean-Baptiste Bartre
 - Demian Bretin Alvarez
