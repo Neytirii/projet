@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  href="style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Instant Weather</title>
 </head>
+
 <body>
-    
+
     <form>
         <h1>Instant Weather </h1>
-       
+
         <label for="code-postal">Code Postal : </label>
-        <input type="text" id="code-postal" placeholder="Saisir le code postal" />
+        <input type="text" id="code-postal" placeholder="Saisir le code postal" required maxlength="5"/>
         <div id="menu-déroulant"></div>
         <!-- peut etre mieux de ne pas avoir de bouton, faire en sorte que ca marche des qu'on choisit le nom -->
-        <button>Valider</button>
+        <script src="script.js"></script>
+          
     </form>
-    <script src="script.js"></script>
+    
+    <article id="meteo">
+        
+    </article>
 </body>
+
 </html>
