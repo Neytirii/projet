@@ -1,22 +1,38 @@
-let input_cp = document.getElementById("code-postal");
-input_cp.addEventListener("input", function(){
-    let code_postal = input_cp.value
-    if (code_postal.length == 5){
-       recup_cp(code_postal);
+const input_cp = document.getElementById("code-postal");
+const menu_commune = document.getElementById("menu-deroulant")
+menu_commune.style.display = "none"
+
+input_cp.addEventListener("input", async () => {
+    let code_postal = input_cp.value;
+    if (/^\d{5}$/.test(code_postal)){
+        try {
+            let donnee_commune = await recup_communes(code_postal);
+            affiche_commune(donnee_commune)
+        } catch (error) {
+            console.log("Erreur lors de la récupération des données de communes", error);
+            throw error;
+        }
+       
     } 
 });
 
-function recup_cp(cp) {
+async function recup_communes(cp) {
     let url = `https://geo.api.gouv.fr/communes?codePostal=${cp}`;
-    let liste_commune = []
     try {
-        fetch(url)
-        .then((resp) => resp.json())
-        .then(function(communes) {
-            communes.forEach((element) => liste_commune.push(element));
-            console.table(liste_commune);
-        })
+        let reponse = await fetch(url);
+        let donnee_commune = await reponse.json();
+        console.table(donnee_commune);
+        return donnee_commune;
     } catch (error) {
-        console.log("Le code postale récupérer n'est pas bon");
+        console.log("Erreur lors de la récupération des données de communes", error);
+        throw error;
     }
+}
+
+function affiche_commune(donnee) {
+    menu_commune.innerHTML = ""
+    donnee.forEach(commune => {
+        menu_commune.innerHTML += `<option>${Object.values(commune)[0]}</option>`
+    });
+    menu_commune.style.display = "initial"
 }
